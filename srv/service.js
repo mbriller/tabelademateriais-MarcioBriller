@@ -25,9 +25,9 @@ module.exports = cds.service.impl(async function () {
 
         this.on('adicionarMaterial', async (req) => {
             debugger;
-            const { ID, NumMat, Nome, Descr } = req.data;
+            const { NumMat, Nome, Descr } = req.data;
 
-            if (!ID || !NumMat || !Nome || !Descr) {
+            if (!NumMat || !Nome || !Descr) {
                 return req.error(400, 'Campos obrigatórios não preenchidos');
             }
 

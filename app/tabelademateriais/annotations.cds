@@ -1,0 +1,1 @@
+using CadMat as service from '../../srv/service';
