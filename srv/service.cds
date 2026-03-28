@@ -5,4 +5,11 @@ service CadMat {
 
     function filtroMateriais(QTD : Integer) returns array of Materiais;
         
-    }
+    action adicionarMaterial(
+        ID     : Integer,
+        NumMat : Integer,
+        Nome   : String(50),
+        Descr  : String(80)
+  ) returns String;
+
+}
