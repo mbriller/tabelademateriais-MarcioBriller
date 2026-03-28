@@ -25,7 +25,7 @@
 
             <columns>
                 <Column><Text text="ID"/></Column>
-                <Column><Text text="NumMat"/></Column>
+                <Column><Text text="Número Material"/></Column>
                 <Column><Text text="Nome"/></Column>
                 <Column><Text text="Descrição"/></Column>
             </columns>

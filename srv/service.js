@@ -32,7 +32,7 @@ module.exports = cds.service.impl(async function () {
             }
 
             // Verificar duplicidade 
-            const matExistente = await SELECT.one.from(Materiais).Where({ NumMat });
+            const matExistente = await SELECT.one.from(Materiais).where({ NumMat });
             if (matExistente) {
                 return req.error(400, 'Material já cadastro com esse número de material');
             }

@@ -7,12 +7,12 @@ sap.ui.define([
 
     return Controller.extend("tabelademateriais.controller.Table", {
         onInit() {
-            this._criarModel();
-            this._carregarDados();
+            this.criarModel();
+            this.carregarDados();
         },
 
         // Cria a Model
-        _criarModel: function () {
+        criarModel: function () {
             const oModel = new JSONModel({
                 tableMaterial: []
             });
@@ -20,7 +20,7 @@ sap.ui.define([
         },
 
         // Carrega dados iniciais
-        _carregarDados: async function () {
+        carregarDados: async function () {
             try {
                 const response = await fetch("/odata/v4/cad-mat/Materiais");
                 const data = await response.json();
@@ -52,13 +52,21 @@ sap.ui.define([
             }
         },
 
+        resetDialog: function () {
+            this._inputNumMat.setValue("");
+            this._inputNome.setValue("");
+            this._inputDescr.setValue("");
+        },
+
         // Abrir popup
         onAbrirDialog: function () {
-            this._inputNumMat = new sap.m.Input({ placeholder: "NumMat" });
-            this._inputNome = new sap.m.Input({ placeholder: "Nome" });
-            this._inputDescr = new sap.m.Input({ placeholder: "Descrição" });
-
+            debugger;
             if (!this._dialog) {
+
+                this._inputNumMat = new sap.m.Input({ placeholder: "NumMat" });
+                this._inputNome = new sap.m.Input({ placeholder: "Nome" });
+                this._inputDescr = new sap.m.Input({ placeholder: "Descrição" });
+
                 this._dialog = new sap.m.Dialog({
                     title: "Novo Material",
                     content: [
@@ -79,7 +87,7 @@ sap.ui.define([
                 });
                 this.getView().addDependent(this._dialog);
             }
-
+            this.resetDialog();
             this._dialog.open();
         },
 
@@ -88,7 +96,7 @@ sap.ui.define([
             debugger;
             const NumMat = this._inputNumMat.getValue();
             const Nome = this._inputNome.getValue();
-            const Descr = this._inputNome.getValue();
+            const Descr = this._inputDescr.getValue();
 
             if (!NumMat || !Nome || !Descr) {
                 MessageBox.error("Preencha todos os campos");
@@ -102,21 +110,21 @@ sap.ui.define([
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        NumMat: parseInt(NumMat),
+                        NumMat: Number(NumMat),
                         Nome,
                         Descr
                     })
                 });
 
+                const data = await response.json();
+
                 if (response.ok) {
                     MessageBox.success("Material criado com sucesso");
                     this._dialog.close();
-                    this._carregarDados();
+                    this.carregarDados();
                 } else {
-                    const err = await response.json();
-                    MessageBox.error(err.error.message);
-                }
-
+                    MessageBox.error(data.error?.message || "Erro ao criar material");                
+                }                
             } catch (error) {
                 MessageBox.error("Erro ao criar material");
             }
