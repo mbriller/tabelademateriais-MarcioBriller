@@ -6,8 +6,8 @@
         <VBox class="sapUiSmallMargin">
 
         <HBox>
-            <Input id="inputQtd" placeholder="Quantidade de registros" width="200px"/>
-            <Button text="Filtrar" press="onFiltrar"/>
+            <Input id="inputQtd" placeholder="{i18n>Qtde}" width="200px"/>
+            <Button text="{i18n>Filtrar}" press="onFiltrar"/>
         </HBox>
 
         <Table
@@ -17,17 +17,17 @@
 
             <headerToolbar>
                 <Toolbar>
-                    <Title text="Materiais"/>
+                    <Title text="{i18n>Materiais}"/>
                     <ToolbarSpacer/>
-                    <Button text="Criar" press="onAbrirDialog"/>
+                    <Button text="{i18n>Criar}" press="onAbrirDialog"/>
                 </Toolbar>
             </headerToolbar>
 
             <columns>
-                <Column><Text text="ID"/></Column>
-                <Column><Text text="Número Material"/></Column>
-                <Column><Text text="Nome"/></Column>
-                <Column><Text text="Descrição"/></Column>
+                <Column><Text text="{i18n>ID}"/></Column>
+                <Column><Text text="{i18n>NumMat}"/></Column>
+                <Column><Text text="{i18n>Nome}"/></Column>
+                <Column><Text text="{i18n>Descricao}"/></Column>
             </columns>
 
             <items>
