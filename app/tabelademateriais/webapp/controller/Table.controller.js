@@ -8,8 +8,13 @@ sap.ui.define([
     return Controller.extend("tabelademateriais.controller.Table", {
         onInit() {
             this.criarModel();
-            this.carregarDados();
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.getRoute("RouteTable").attachPatternMatched(this.onRouteMatched, this);
         },
+
+        onRouteMatched: function () {
+            this.carregarDados();        
+        },      
 
         // Cria a Model
         criarModel: function () {
@@ -117,9 +122,13 @@ sap.ui.define([
                         Descr
                     })
                 });
-
-                const data = await response.json();
-
+                
+                console.log(response.status);
+                let data = null;
+                if (response.status !== 204) {
+                    data = await response.json();
+                }
+                
                 if (response.ok) {
                     MessageBox.success("Material criado com sucesso");
                     this._dialog.close();
@@ -129,6 +138,7 @@ sap.ui.define([
                 }                
             } catch (error) {
                 MessageBox.error("Erro ao criar material");
+                console.error(error);
             }
         }
 
