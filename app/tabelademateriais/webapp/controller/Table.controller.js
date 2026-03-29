@@ -21,6 +21,7 @@ sap.ui.define([
 
         // Carrega dados iniciais
         carregarDados: async function () {
+            debugger;
             try {
                 const response = await fetch("/odata/v4/cad-mat/Materiais");
                 const data = await response.json();
@@ -34,6 +35,7 @@ sap.ui.define([
 
         // Filtro
         onFiltrar: async function () {
+            debugger;
             const qtd = this.byId("inputQtd").getValue();
 
             if (!qtd) {
