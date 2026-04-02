@@ -51,10 +51,10 @@ module.exports = cds.service.impl(async function () {
                 });
 
                 // Retorno de sucesso
-                //return `Material ${NumMat} criado com sucesso com ID ${novoID}`;
+                return `Material ${NumMat} criado com sucesso com ID ${novoID}`;
             } catch (err) {
                 // Retorno de erro
-                //return req.reject(500, 'Erro ao inserir material na tabela');
+                return req.reject(500, 'Erro ao inserir material na tabela');
             }
         })
 })    
