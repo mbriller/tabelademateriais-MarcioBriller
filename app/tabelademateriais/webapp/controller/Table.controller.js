@@ -130,15 +130,19 @@ sap.ui.define([
                 }
                 
                 if (response.ok) {
-                    MessageBox.success("Material criado com sucesso");
+                    const msg = data?.value;
+                    MessageBox.success(msg);
+                    //MessageBox.success("Material criado com sucesso");
                     this._dialog.close();
                     this.carregarDados();
                 } else {
-                    MessageBox.error(data.error?.message || "Erro ao criar material");                
+                    //MessageBox.error(data.error?.message || "Erro ao criar material");                
+                    MessageBox.error(data?.error?.message);                
                 }                
             } catch (error) {
-                MessageBox.error("Erro ao criar material");
-                console.error(error);
+                //MessageBox.error("Erro ao criar material");
+                MessageBox.error(error.message);
+                //console.error(error);
             }
         }
 
